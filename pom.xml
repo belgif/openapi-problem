@@ -36,4 +36,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>Belgif GitHub maven repository</name>
+			<url>https://maven.pkg.github.com/belgif</url>
+		</repository>
+	</distributionManagement>
 </project>
