@@ -17,7 +17,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<id>create-distribution</id>
@@ -26,9 +26,10 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
+							<appendAssemblyId>true</appendAssemblyId>
 							<descriptors>
-								<descriptor>src/main/assembly/zip.xml</descriptor>
+								<descriptor>src/main/assembly/swagger-2.0.xml</descriptor>
+								<descriptor>src/main/assembly/openapi-3.0.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
