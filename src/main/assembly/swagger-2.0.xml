@@ -2,14 +2,14 @@
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
-	<id>zip</id>
+	<id>swagger-2.0</id>
 	<formats>
 		<format>zip</format>
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>src/main/openapi</directory>
+			<directory>src/main/swagger-2.0</directory>
 			<outputDirectory></outputDirectory>
 			<excludes>
 				<exclude>**/*beta/**</exclude>
