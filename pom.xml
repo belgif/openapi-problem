@@ -28,8 +28,8 @@
 						<configuration>
 							<appendAssemblyId>true</appendAssemblyId>
 							<descriptors>
-								<descriptor>src/main/assembly/swagger-2.0.xml</descriptor>
-								<descriptor>src/main/assembly/openapi-3.0.xml</descriptor>
+								<descriptor>src/main/assembly/swagger.xml</descriptor>
+								<descriptor>src/main/assembly/openapi.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
