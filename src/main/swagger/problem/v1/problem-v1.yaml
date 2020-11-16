@@ -7,7 +7,7 @@ responses:
   ProblemResponse:
     description: a problem
     schema:
-      $ref: '#/definitions/Problem'
+      $ref: "#/definitions/Problem"
 definitions:
   Problem:
     description: A Problem Details object (RFC 7807)
@@ -39,15 +39,15 @@ definitions:
         description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
   InvalidParamProblem:
     description: Problem details for invalid input parameter(s)
+    type: object
     allOf:
-      - $ref: '#/definitions/Problem'
-      - type: object
-        properties:
-          invalidParams:
-            type: array
-            description: An array of parameter OpenAPI violations
-            items:
-              $ref: '#/definitions/InvalidParam'
+      - $ref: "#/definitions/Problem"
+    properties:
+      invalidParams:
+        type: array
+        description: An array of parameter OpenAPI violations
+        items:
+          $ref: "#/definitions/InvalidParam"
   InvalidParam:
     type: object
     properties:
