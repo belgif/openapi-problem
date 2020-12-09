@@ -1,5 +1,5 @@
 # Release belgif openapi projects to Maven Central when a version tag is created
-name: openapi-maven-ci
+name: openapi-maven-release
 on:
   push:
     tags:
