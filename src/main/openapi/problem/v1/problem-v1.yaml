@@ -20,11 +20,15 @@ components:
         type:
           type: string
           format: uri
-          description: An URI reference that identifies the problem type. When dereferenced, it SHOULD provide human-readable documentation for the problem type (e.g. using HTML).
-          default: about:blank
+          description: An absolute URI that identifies the problem type
+          default: about:blank  # kept for backwards-compatibility, type will be mandatory in problem-v2
+        href:
+          type: string
+          format: uri
+          description: An absolute URI that, when dereferenced, provides human-readable documentation for the problem type (e.g. using HTML).
         title:
           type: string
-          description: A short, summary of the problem type. Written in english and readable for engineers (usually not suited for non technical stakeholders and not localized)
+          description: A short, summary of the problem type. Written in English and readable for engineers (usually not suited for non technical stakeholders and not localized).
           example: Service Unavailable
         status:
           type: integer
@@ -40,7 +44,17 @@ components:
         instance:
           type: string
           format: uri
-          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+      example:
+        {
+          "type": "urn:problem-type:belgif:payloadTooLarge",
+          "href": "https://www.gcloud.belgium.be/rest/problems/payloadTooLarge", # location might change in the future
+          "title": "Payload Too Large",
+          "status": 413,
+          "detail": "Request message must not be larger than 10 MB",
+          "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+          "limit": 10485760  # additional properties specific to the problem type are allowed
+        }
     InvalidParamProblem:
       description: Problem details for invalid input parameter(s)
       type: object
