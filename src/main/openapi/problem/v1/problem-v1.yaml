@@ -82,9 +82,6 @@ components:
         name:
           description: The name of the invalid parameter
           type: string
-        reason:
-          description: A message explaining the violation
-          type: string
         value:
           description: The value of the erroneous parameter
           # no type specified, allowing any type. This is valid OpenAPI 3.0 even though some editors may indicate an error (issue #25)
@@ -101,6 +98,7 @@ components:
       type: object
       allOf:
         - $ref: "#/components/schemas/Problem"
+        # status property of Problem is usually not used for input validation issues
       properties:
         in:
           type: string
@@ -115,18 +113,16 @@ components:
       required: [in, name]
       example:
         type:  urn:problem-type:belgif:badRequest 
-        href: https://belgif.be/problems/badRequest
+        href: https://www.gcloud.belgium.be/rest/problems/badRequest.html
         title: Bad Request
         status: 400
         detail:  "The input message is incorrect"
         instance: urn:uuid:123456-1234-1235-4567489798
         issues:
         - type: urn:problem-type:belgif:input-validation:schemaViolation #mandatory
-          # TODO: foresee dereferenceable href for belgif input validation problems
+          # href - TODO: foresee dereferenceable link for belgif input validation problems
           title: "Input isn't valid with respect to schema"
-          # no status property should be present for input validation issues
           detail: enterpriseNumber abc should be numeric # recommended, if more detail can be provided
-          # following additional properties are standardized but optional
           in: path
           name: enterpriseNumber
           value: abc
