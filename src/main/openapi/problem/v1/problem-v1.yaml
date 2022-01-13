@@ -94,23 +94,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/InputValidationIssue"
-    InputValidationIssue:
-      type: object
-      allOf:
-        - $ref: "#/components/schemas/Problem"
-        # status property of Problem is usually not used for input validation issues
-      properties:
-        in:
-          type: string
-          enum:
-            - body
-            - header
-            - path
-            - query
-        name:
-          type: string
-        value: {} # any type allowed
-      required: [in, name]
       example:
         type:  urn:problem-type:belgif:badRequest 
         href: https://www.gcloud.belgium.be/rest/problems/badRequest.html
@@ -120,7 +103,7 @@ components:
         instance: urn:uuid:123456-1234-1235-4567489798
         issues:
         - type: urn:problem-type:belgif:input-validation:schemaViolation #mandatory
-          # href - TODO: foresee dereferenceable link for belgif input validation problems
+          # href: TODO: foresee dereferenceable link for belgif input validation problems
           title: "Input isn't valid with respect to schema"
           detail: enterpriseNumber abc should be numeric # recommended, if more detail can be provided
           in: path
@@ -146,4 +129,20 @@ components:
           title: "There is no person with the given SSIN"
           in: path
           name: ssin
-          value: "12345678911" 
+          value: "12345678911"
+    InputValidationIssue:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Problem"
+        # status property of Problem is usually not used for input validation issues
+      properties:
+        in:
+          type: string
+          enum:
+            - body
+            - header
+            - path
+            - query
+        name:
+          type: string
+        value: {} # any type allowed
