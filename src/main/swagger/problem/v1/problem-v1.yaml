@@ -44,7 +44,7 @@ definitions:
     example:
       {
         "type": "urn:problem-type:belgif:payloadTooLarge",
-        "href": "https://www.gcloud.belgium.be/rest/problems/payloadTooLarge.html", # location of linked doc will change in the future to recommended URI structure
+        "href": "https://www.belgif.be/specification/rest/api-guide/problems/payloadTooLarge.html", # location of linked doc will change in the future to recommended URI structure
         "title": "Payload Too Large",
         "status": 413,
         "detail": "Request message must not be larger than 10 MB",
@@ -95,7 +95,7 @@ definitions:
           $ref: "#/definitions/InputValidationIssue"
     example:
       type:  urn:problem-type:belgif:badRequest 
-      href: https://www.gcloud.belgium.be/rest/problems/badRequest.html
+      href: https://www.belgif.be/specification/rest/api-guide/problems/badRequest.html
       title: Bad Request
       status: 400
       detail:  "The input message is incorrect"
