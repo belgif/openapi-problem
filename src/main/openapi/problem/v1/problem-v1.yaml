@@ -84,7 +84,14 @@ components:
           type: string
         value:
           description: The value of the erroneous parameter
-          # no type specified, allowing any type. This is valid OpenAPI 3.0 even though some editors may indicate an error (issue #25)
+          # Define all possible types as default "type: object" can cause issues in some editors/validation libraries
+          oneOf:
+            - type: string
+            - type: number
+            - type: integer
+            - type: boolean
+            - type: array
+            - type: object
     InputValidationProblem:
       type: object
       allOf:
@@ -145,4 +152,12 @@ components:
             - query
         name:
           type: string
-        value: {} # any type allowed
+        value:
+          # Define all possible types as default "type: object" can cause issues in some editors/validation libraries
+          oneOf:
+            - type: string
+            - type: number
+            - type: integer
+            - type: boolean
+            - type: array
+            - type: object
