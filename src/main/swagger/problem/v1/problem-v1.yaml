@@ -8,6 +8,10 @@ responses:
     description: a problem
     schema:
       $ref: "#/definitions/Problem"
+  InputValidationProblemResponse:
+    description: A problem caused by invalid input
+    schema:
+      $ref: "#/definitions/InputValidationProblem"
 definitions:
   Problem:
     description: A Problem Details object (RFC 7807)
