@@ -12,6 +12,12 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
       description: a problem
+    InputValidationProblemResponse:
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/InputValidationProblem"
+      description: A problem caused by invalid input
   schemas:
     Problem:
       description: A Problem Details object (RFC 7807)
