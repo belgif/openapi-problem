@@ -56,13 +56,13 @@ components:
           description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
       example:
         {
-          "type": "urn:problem-type:belgif:payloadTooLarge",
-          "href": "https://www.belgif.be/specification/rest/api-guide/problems/payloadTooLarge.html", # location of linked doc will change in the future to recommended URI structure
-          "title": "Payload Too Large",
-          "status": 413,
-          "detail": "Request message must not be larger than 10 MB",
-          "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
-          "limit": 10485760  # additional properties specific to the problem type are allowed
+          "type": "urn:problem-type:belgif:exampleProblem",
+          "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
+          "title": "Description of exampleProblem type",
+          "status": 400, # HTTP response status, appropriate for the problem type
+          "detail": "Description of specific occurrence of exampleProblem",
+          "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"
+          # additional properties specific to the problem type may be present
         }
     InvalidParamProblem:
       deprecated: true # deprecated by InputValidationProblem
@@ -118,27 +118,12 @@ components:
           in: path
           name: enterpriseNumber
           value: abc
-        - type: urn:problem-type:cbss:input-validation:replacedSsin # example of custom input validation issue defined by organization "CBSS"
-          href: https://api.ksz-bcss.fgov.be/problems/replacedSsin
-          title: "SSIN has been replaced. Use new ssin."
-          detail: "SSIN 12345678901 has been replaced by 23456789012"
+        - type: urn:problem-type:belgif:input-validation:schemaViolation
+          title: "Input isn't valid with respect to schema"
+          detail: "ssin a2345678901 doesn't match pattern '^\d{11}$'"
           in: body
           name: parent[0].ssin
-          value: "12345678901" 
-          replacedBy: "23456789012" 
-        - type: urn:problem-type:cbss:input-validation:invalidPeriod
-          title: period is invalid
-          detail: endDate should be after startDate
-          in: body
-          name: period
-          value:
-            startDate: "2020-12-31" 
-            endDate: "2020-01-01" 
-        - type: urn:problem-type:cbss:input-validation:invalidSsin
-          title: "There is no person with the given SSIN"
-          in: path
-          name: ssin
-          value: "12345678911"
+          value: "a2345678901"
     InputValidationIssue:
       type: object
       allOf:
