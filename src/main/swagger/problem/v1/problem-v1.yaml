@@ -17,7 +17,7 @@ responses:
       $ref: "#/definitions/InputValidationProblem"
 definitions:
   Problem:
-    description: A Problem Details object (RFC 7807)
+    description: A Problem Details object (RFC 9457)
     type: object
     properties:
       type:
