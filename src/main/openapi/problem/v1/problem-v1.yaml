@@ -58,9 +58,9 @@ components:
         {
           "type": "urn:problem-type:belgif:exampleProblem",
           "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types",
-          "title": "Description of exampleProblem type",
+          "title": "Description of the type of problem that occured",
           "status": 400, # HTTP response status, appropriate for the problem type
-          "detail": "Description of specific occurrence of exampleProblem",
+          "detail": "Description of specific occurrence of the problem",
           "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"
           # additional properties specific to the problem type may be present
         }
@@ -111,18 +111,18 @@ components:
         detail:  "The input message is incorrect"
         instance: urn:uuid:123456-1234-1235-4567489798
         issues:
-        - type: urn:problem-type:belgif:input-validation:schemaViolation #mandatory
+        - type: urn:problem-type:belgif:input-validation:schemaViolation # type is mandatory
           # href: TODO: foresee dereferenceable link for belgif input validation problems
           title: "Input isn't valid with respect to schema"
-          detail: enterpriseNumber abc should be numeric # recommended, if more detail can be provided
+          detail: exampleNumericProperty with value xyz should be numeric # detail is optional
           in: path
-          name: enterpriseNumber
+          name: exampleNumericProperty
           value: abc
         - type: urn:problem-type:belgif:input-validation:schemaViolation
           title: "Input isn't valid with respect to schema"
-          detail: "ssin a2345678901 doesn't match pattern '^\d{11}$'"
+          detail: "examplePropertyWithPattern a2345678901 doesn't match pattern '^\d{11}$'"
           in: body
-          name: parent[0].ssin
+          name: items[0].examplePropertyWithPattern # location within the body
           value: "a2345678901"
     InputValidationIssue:
       type: object
