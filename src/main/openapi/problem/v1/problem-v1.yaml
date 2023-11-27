@@ -56,7 +56,7 @@ components:
           description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
       example:
         {
-          "type": "urn:problem-type:exampleOrganization:exampleProblem", # "exampleOrganization" should be the organization that defines the problem type. "belgif" is used for problem types standardized in the Belgif REST guide
+          "type": "urn:problem-type:exampleOrganization:exampleProblem", # "exampleOrganization" should be a short identifier for the organization that defines the problem type. "belgif" is used for problem types standardized in the Belgif REST guide
           "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", # should refer to documentation of the problem type, either a belgif standardized problem, or to documentation of a custom problem type
           "title": "Description of the type of problem that occurred",
           "status": 400, # HTTP response status, appropriate for the problem type
@@ -111,8 +111,8 @@ components:
         detail:  "The input message is incorrect"
         instance: urn:uuid:123456-1234-1235-4567489798
         issues:
-        - type: urn:problem-type:belgif:input-validation:schemaViolation # type is mandatory
-          # href: TODO: provide dereferenceable link with documentation for belgif input validation problems
+        - type: urn:problem-type:belgif:input-validation:schemaViolation # type is mandatory, can be a standard belgif issue type or a custom one
+          # href: optional link to documentation of the issue type (TODO: provide dereferenceable link with documentation for standard belgif input validation problems)
           title: "Input isn't valid with respect to schema"
           detail: exampleNumericProperty with value xyz should be numeric # detail is optional
           in: path
