@@ -17,7 +17,10 @@ responses:
       $ref: "#/definitions/InputValidationProblem"
 definitions:
   Problem:
-    description: A Problem Details object (RFC 9457)
+    description: |
+      A Problem Details object (RFC 9457).
+      
+      Additional properties specific to the problem type may be present.
     type: object
     properties:
       type:
@@ -55,7 +58,6 @@ definitions:
       status: 400 # HTTP response status, appropriate for the problem type
       detail: Description of specific occurrence of the problem
       instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
-      # additional properties specific to the problem type may be present
   InvalidParamProblem:
     x-deprecated: true # deprecated by InputValidationProblem
     description: Problem details for invalid input parameter(s)
@@ -107,12 +109,11 @@ definitions:
       instance: urn:uuid:123456-1234-1235-4567489798
       issues:
         - type: urn:problem-type:belgif:input-validation:schemaViolation # type is mandatory, can be a standard belgif issue type or a custom one
-          # href: optional, should refer to documentation of the issue type (TODO: provide dereferenceable link with documentation for standard belgif input validation problems)
+          # href: (TODO: provide dereferenceable link with documentation for standard belgif input validation problems)
           detail: exampleNumericProperty with value xyz should be numeric # detail is optional
           in: path
           name: exampleNumericProperty
           value: abc
-          # additional properties specific to the issue type may be present
         - type: urn:problem-type:belgif:input-validation:schemaViolation
           title: "Input isn't valid with respect to schema"
           detail: "examplePropertyWithPattern a2345678901 doesn't match pattern '^\\d{11}$'"
@@ -121,12 +122,18 @@ definitions:
           value: "a2345678901"
   InputValidationIssue:
     type: object
+    description: |
+      An issue detected during input validation.
+
+      `status` is usually not present.
+      `href`, if present, refers to documentation of the issue type.
+      Additional properties specific to the issue type may be present.
     allOf:
       - $ref: "#/definitions/Problem"
-      # status property of Problem is usually not used for input validation issues
     properties:
       in:
         type: string
+        description: The location of the invalid input
         enum:
           - body
           - header
@@ -134,4 +141,7 @@ definitions:
           - query
       name:
         type: string
-      value: {} # any type allowed
+        description: The name of the invalid input
+      value:
+        description: The value of the erroneous input
+        # no type specified, allowing any type. This is valid in OpenAPI even though some editors may indicate an error
