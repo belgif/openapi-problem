@@ -55,15 +55,13 @@ components:
           format: uri
           description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
       example:
-        {
-          "type": "urn:problem-type:exampleOrganization:exampleProblem", # "exampleOrganization" should be a short identifier for the organization that defines the problem type. "belgif" is used for problem types standardized in the Belgif REST guide
-          "href": "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types", # optional, should refer to documentation of the problem type, either of a belgif standardized or a custom problem type
-          "title": "Description of the type of problem that occurred",
-          "status": 400, # HTTP response status, appropriate for the problem type
-          "detail": "Description of specific occurrence of the problem",
-          "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"
-          # additional properties specific to the problem type may be present
-        }
+        type: urn:problem-type:exampleOrganization:exampleProblem # "exampleOrganization" should be a short identifier for the organization that defines the problem type. "belgif" is used for problem types standardized in the Belgif REST guide
+        href: "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types" # optional, should refer to documentation of the problem type, either of a belgif standardized or a custom problem type
+        title: Description of the type of problem that occurred
+        status: 400 # HTTP response status, appropriate for the problem type
+        detail: Description of specific occurrence of the problem
+        instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
+        # additional properties specific to the problem type may be present
     InvalidParamProblem:
       deprecated: true # deprecated by InputValidationProblem
       description: Problem details for invalid input parameter(s)
