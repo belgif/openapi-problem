@@ -17,7 +17,10 @@ responses:
       $ref: "#/definitions/InputValidationProblem"
 definitions:
   Problem:
-    description: A Problem Details object (RFC 9457)
+    description: |
+      A Problem Details object (RFC 9457).
+      
+      Additional properties specific to the problem type may be present.
     type: object
     properties:
       type:
@@ -49,15 +52,12 @@ definitions:
         format: uri
         description: An absolute URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
     example:
-      {
-        "type": "urn:problem-type:belgif:payloadTooLarge",
-        "href": "https://www.belgif.be/specification/rest/api-guide/problems/payloadTooLarge.html", # location of linked doc will change in the future to recommended URI structure
-        "title": "Payload Too Large",
-        "status": 413,
-        "detail": "Request message must not be larger than 10 MB",
-        "instance": "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
-        "limit": 10485760  # additional properties specific to the problem type are allowed
-      }
+      type: urn:problem-type:exampleOrganization:exampleProblem # "exampleOrganization" should be a short identifier for the organization that defines the problem type. "belgif" is used for problem types standardized in the Belgif REST guide
+      href: "https://www.belgif.be/specification/rest/api-guide/#standardized-problem-types" # optional, should refer to documentation of the problem type, either of a belgif standardized or a custom problem type
+      title: Description of the type of problem that occurred
+      status: 400 # HTTP response status, appropriate for the problem type
+      detail: Description of specific occurrence of the problem
+      instance: urn:uuid:123e4567-e89b-12d3-a456-426614174000
   InvalidParamProblem:
     x-deprecated: true # deprecated by InputValidationProblem
     description: Problem details for invalid input parameter(s)
@@ -101,49 +101,39 @@ definitions:
         items:
           $ref: "#/definitions/InputValidationIssue"
     example:
-      type:  urn:problem-type:belgif:badRequest 
+      type: urn:problem-type:belgif:badRequest
       href: https://www.belgif.be/specification/rest/api-guide/problems/badRequest.html
       title: Bad Request
       status: 400
       detail:  "The input message is incorrect"
       instance: urn:uuid:123456-1234-1235-4567489798
       issues:
-      - type: urn:problem-type:belgif:input-validation:schemaViolation #mandatory
-        # href: TODO: foresee dereferenceable link for belgif input validation problems
-        title: "Input isn't valid with respect to schema"
-        detail: enterpriseNumber abc should be numeric # recommended, if more detail can be provided
-        in: path
-        name: enterpriseNumber
-        value: abc
-      - type: urn:problem-type:cbss:input-validation:replacedSsin # example of custom input validation issue defined by organization "CBSS"
-        href: https://api.ksz-bcss.fgov.be/problems/replacedSsin
-        title: "SSIN has been replaced. Use new ssin."
-        detail: "SSIN 12345678901 has been replaced by 23456789012"
-        in: body
-        name: parent[0].ssin
-        value: "12345678901" 
-        replacedBy: "23456789012" 
-      - type: urn:problem-type:cbss:input-validation:invalidPeriod
-        title: period is invalid
-        detail: endDate should be after startDate
-        in: body
-        name: period
-        value:
-          startDate: "2020-12-31" 
-          endDate: "2020-01-01" 
-      - type: urn:problem-type:cbss:input-validation:invalidSsin
-        title: "There is no person with the given SSIN"
-        in: path
-        name: ssin
-        value: "12345678911"
+        - type: urn:problem-type:belgif:input-validation:schemaViolation # type is mandatory, can be a standard belgif issue type or a custom one
+          # href: (TODO: provide dereferenceable link with documentation for standard belgif input validation problems)
+          detail: exampleNumericProperty with value xyz should be numeric # detail is optional
+          in: path
+          name: exampleNumericProperty
+          value: abc
+        - type: urn:problem-type:belgif:input-validation:schemaViolation
+          title: "Input isn't valid with respect to schema"
+          detail: "examplePropertyWithPattern a2345678901 doesn't match pattern '^\\d{11}$'"
+          in: body
+          name: items[0].examplePropertyWithPattern # location within the body
+          value: "a2345678901"
   InputValidationIssue:
     type: object
+    description: |
+      An issue detected during input validation.
+
+      `status` is usually not present.
+      `href`, if present, refers to documentation of the issue type.
+      Additional properties specific to the issue type may be present.
     allOf:
       - $ref: "#/definitions/Problem"
-      # status property of Problem is usually not used for input validation issues
     properties:
       in:
         type: string
+        description: The location of the invalid input
         enum:
           - body
           - header
@@ -151,4 +141,7 @@ definitions:
           - query
       name:
         type: string
-      value: {} # any type allowed
+        description: The name of the invalid input
+      value:
+        description: The value of the erroneous input
+        # no type specified, allowing any type. This is valid in OpenAPI even though some editors may indicate an error
