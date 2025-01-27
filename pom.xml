@@ -16,9 +16,26 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>io.github.belgif.rest.guide.validator</groupId>
+				<artifactId>belgif-rest-guide-validator-maven-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<files>
+						<file>src/main/openapi/problem/v1/problem-v1.yaml</file>
+					</files>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>3.7.1</version>
 				<executions>
 					<execution>
 						<id>create-distribution</id>
@@ -29,7 +46,6 @@
 						<configuration>
 							<appendAssemblyId>true</appendAssemblyId>
 							<descriptors>
-								<descriptor>src/main/assembly/swagger.xml</descriptor>
 								<descriptor>src/main/assembly/openapi.xml</descriptor>
 							</descriptors>
 						</configuration>
@@ -39,12 +55,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.2</version>
+				<version>3.1.3</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.6</version>
+				<version>3.2.7</version>
 				<executions>
 					<execution>
 						<phase>verify</phase>
