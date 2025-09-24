@@ -112,12 +112,13 @@ components:
         instance: urn:uuid:123456-1234-1235-4567489798
         issues:
           - type: urn:problem-type:belgif:input-validation:schemaViolation # type is mandatory, can be a standard belgif issue type or a custom one
-            # href: (TODO: provide dereferenceable link with documentation for standard belgif input validation problems)
+            href: https://www.belgif.be/specification/rest/api-guide/issues/schemaViolation.html # optional, should refer to documentation of the issue type, either of a belgif standardized or a custom issue type
             detail: exampleNumericProperty with value xyz should be numeric # detail is optional
             in: path
             name: exampleNumericProperty
             value: abc
           - type: urn:problem-type:belgif:input-validation:schemaViolation
+            href: https://www.belgif.be/specification/rest/api-guide/issues/schemaViolation.html
             title: "Input isn't valid with respect to schema"
             detail: "examplePropertyWithPattern a2345678901 doesn't match pattern '^\\d{11}$'"
             in: body
