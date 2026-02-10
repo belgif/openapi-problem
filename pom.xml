@@ -18,7 +18,7 @@
 			<plugin>
 				<groupId>io.github.belgif.rest.guide.validator</groupId>
 				<artifactId>belgif-rest-guide-validator-maven-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.2.1</version>
 				<executions>
 					<execution>
 						<goals>
