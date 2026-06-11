@@ -122,7 +122,7 @@ components:
             title: "Input isn't valid with respect to schema"
             detail: "examplePropertyWithPattern a2345678901 doesn't match pattern '^\\d{11}$'"
             in: body
-            name: items[0].examplePropertyWithPattern # location within the body
+            name: "#/items/0/examplePropertyWithPattern" # location within the body
             value: "a2345678901"
     InputValidationIssue:
       type: object
